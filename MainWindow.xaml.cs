@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Hudelsis_P2_AP1.UI.Registros;
+//using Hudelsis_P2_AP1.UI.Consultas;
 
 namespace Hudelsis_P2_AP1
 {
@@ -24,12 +26,15 @@ namespace Hudelsis_P2_AP1
         {
             InitializeComponent();
         }
-        private void rNombresMenuItem_Click(object sender, RoutedEventArgs e)
+        private void rProyectosMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            rProyectos ventana = new rProyectos();
+            ventana.Show();
            
         }
-        private void cNombresMenuItem_Click(object sender, RoutedEventArgs e)
+        private void cTareasMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            
              
         }
     }

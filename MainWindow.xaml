@@ -11,12 +11,12 @@
            
             <Menu IsMainMenu="True" VerticalAlignment="Top">
                 <MenuItem Header="Registros">
-                    <MenuItem x:Name="rNombresMenuItem"  Header="Registrar " Click="rNombresMenuItem_Click" />
+                    <MenuItem x:Name="rProyectosMenuItem"  Header="Registrar Proyectos" Click="rProyectosMenuItem_Click" />
                     
                 </MenuItem>
 
                 <MenuItem Header="Consultas">
-                    <MenuItem x:Name= "cNombresMenuItem" Header="Consultar  " Click= "cNombresMenuItem_Click"/>
+                    <MenuItem x:Name= "cTareasMenuItem" Header="Consultar Tareas " Click= "cTareasMenuItem_Click"/>
                     
                     
                 </MenuItem>

@@ -1,0 +1,122 @@
+<Window x:Class="Hudelsis_P2_AP1.UI.Registros.rProyectos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hudelsis_P2_AP1.UI.Registros"
+        xmlns:m="clr-namespace:Hudelsis_P2_AP1.Validaciones"
+        mc:Ignorable="d"
+        Title="Registro de Proyecto" Height="520" Width="750" >
+    <Grid>
+        <StackPanel Orientation="Vertical" > 
+            <Label Content="Proyecto Id" FontWeight="Bold" />
+            
+            <StackPanel Orientation="Horizontal" >
+                <TextBox x:Name="ProyectoIdTextbox" Text="{Binding ProyectoId}" Width="75" Height="20" FontWeight="Bold" />
+                <Button x:Name="BuscarButton" Margin="5,0" Width="110" Click="BuscarButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image  Source="/Resources/Buscar.png"  Width="20" Height="20" />
+                        <Label Content="Buscar"  FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            
+            <Label Content="Fecha" FontWeight="Bold"/>
+                <DatePicker Name="FechaDatePickerTextBox"  Margin="5,0">
+                   <DatePicker.SelectedDate>
+                        <Binding Path="Fecha" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                            <m:ValidarFecha x:Name="validarFecha" ValidatesOnTargetUpdated= "True"/>   
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
+            
+            <Label x:Name="DescripcionLabel" Content="Descripción del Proyecto" FontWeight="Bold"/>
+            <TextBox x:Name="DescripcionTextBox" Text="{Binding Descripcion}" Height="48"  />
+
+            
+            <StackPanel Orientation="Vertical">
+                <GroupBox Header="Detalle de tareas a realizar" Margin="0,15,0,0" FontWeight="Bold">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <StackPanel Orientation="Vertical">
+                                <Label Content="Tipo de tarea" FontWeight="Bold"/>
+                                <ComboBox x:Name="TipoTareaComboBox" Width="100" Margin="0,0,10,0"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical">
+                                <Label Content="Requerimiento de la tarea" FontWeight="Bold"/>
+                                <TextBox x:Name="RequerimientoTextBox" Height="22"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical">
+                                <Label Content="Tiempo (minutos)" FontWeight="Bold" Margin="5,0" />
+                                <TextBox x:Name="TiempoTextBox" Height="22" Margin="10,0" TextChanged="TiempoTextBox_TextChanged"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                
+                                <Button x:Name="AgregarFilaButton"  Click="AgregarFilaButton_Click" Height="30">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Resources/fila.png" Height="25"/>
+                                        <Label Content="Agregar fila" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                        
+                        <DataGrid x:Name="DetalleDataGrid" ItemsSource="{Binding Detalle}" Height="80" AutoGenerateColumns="False" Margin="0,10,0,0">
+                            <DataGrid.Columns>
+                                 <DataGridTextColumn Header="TipoId" Binding="{Binding TareaId}"/>
+                                <DataGridTextColumn Header="Tipo Tarea" Binding="{Binding tareas.TipoTarea}"/>
+                                <DataGridTextColumn Header="Requerimiento" Binding="{Binding Requerimiento}"/>
+                                <DataGridTextColumn Header="Tiempo" Binding="{Binding Tiempo}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <StackPanel Orientation="Horizontal" Margin="5,0" >
+                            
+                            <Button x:Name="RemoverFilaButton" Click="RemoverFilaButton_Click" Margin="5,0" Width="175">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Resources/Eliminar.png" Height="25"/>
+                                    <Label Content="Remover fila " FontWeight="Bold"/>
+                                </StackPanel>
+                            </Button>
+                            
+                            <Label Content="Tiempo Total"  Margin="60,0,0,0" FontWeight="Bold" />
+                            <TextBox x:Name="TiempoTotalTextBox" Text="{Binding TiempoTotal}" Width="150" IsReadOnly="True" VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+            
+            
+            <StackPanel Orientation="Horizontal"  Margin="0,15" >
+                <Button x:Name="NuevoButton" Click="NuevoButton_Click" Width="10,0" Margin="10,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image  Source="/Resources/Nuevo.png" Width="20" Height="20"/>
+                        <Label Content="Nuevo" FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
+                
+                <Button x:Name="GuardarButton" Click="GuardarButton_Click" Width="80" Margin="10,0" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image  Source="/Resources/Guardar.png" Width="20" Height="20"/>
+                        <Label Content="Guardar"  FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
+                
+                <Button x:Name="EliminarButton" Click="EliminarButton_Click" Width="80" Margin="10,0" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Eliminar.png" Width="20" Height="20"/>
+                        <Label Content="Eliminar"  FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            
+            
+            
+        </StackPanel>
+    </Grid>
+</Window>
