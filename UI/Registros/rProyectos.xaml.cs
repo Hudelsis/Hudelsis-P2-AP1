@@ -22,8 +22,6 @@ namespace Hudelsis_P2_AP1.UI.Registros
         {
             InitializeComponent();
             this.DataContext = proyectos;
-
-            
             TipoTareaComboBox.ItemsSource = TareasBLL.GetTareas();
             TipoTareaComboBox.SelectedValuePath = "TareaId";
             TipoTareaComboBox.DisplayMemberPath = "TipoTarea";
@@ -70,17 +68,44 @@ namespace Hudelsis_P2_AP1.UI.Registros
         }
         private void AgregarFilaButton_Click(object sender, RoutedEventArgs e)
         {
+            var filaDetalle = new ProyectosDetalle
+            {
+                ProyectoId = this.proyectos.ProyectoId,
+                TareaId = Convert.ToInt32(TipoTareaComboBox.SelectedValue.ToString()),
+                tareas = ((Tareas)TipoTareaComboBox.SelectedItem),
+                Requerimiento = (RequerimientoTextBox.Text),
+                Tiempo = Convert.ToSingle(TiempoTextBox.Text)
+            };
             
+            proyectos.TiempoTotal += Convert.ToDouble(TiempoTextBox.Text.ToString());
+            this.proyectos.Detalle.Add(filaDetalle);
+            Cargar();
+
+            TipoTareaComboBox.SelectedIndex = -1;
+            RequerimientoTextBox.Clear();
+            TiempoTextBox.Clear();
         }
         private void RemoverFilaButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                double total = Convert.ToDouble(TiempoTotalTextBox.Text);
+                if (DetalleDataGrid.Items.Count >= 1 && DetalleDataGrid.SelectedIndex <= DetalleDataGrid.Items.Count - 1)
+                {
+                    proyectos.Detalle.RemoveAt(DetalleDataGrid.SelectedIndex);
+                    proyectos.TiempoTotal -= total;
+                    Cargar();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("No has seleccionado ninguna Fila\n\nSeleccione la Fila a Remover.", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
         {
             Limpiar();
         }
-       
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
             {
@@ -125,7 +150,19 @@ namespace Hudelsis_P2_AP1.UI.Registros
         }
         private void TiempoTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-           
+            try
+            {
+                if (TiempoTextBox.Text.Trim() != "")
+                {
+                    double resultado = double.Parse(TiempoTextBox.Text);
+                }
+            }
+            catch
+            {
+                MessageBox.Show($"El valor digitado en el campo (Tiempo) no es un numero.\n\nPorfavor, digite un numero.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Warning);
+                TiempoTextBox.Clear();
+                TiempoTextBox.Focus();
+            }
         }
     }
 }

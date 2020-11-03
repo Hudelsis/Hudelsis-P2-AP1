@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Hudelsis_P2_AP1.UI.Registros;
-//using Hudelsis_P2_AP1.UI.Consultas;
+using Hudelsis_P2_AP1.UI.Consultas;
 
 namespace Hudelsis_P2_AP1
 {
@@ -34,6 +34,8 @@ namespace Hudelsis_P2_AP1
         }
         private void cTareasMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            cTareas ventana = new cTareas();
+            ventana.Show();
             
              
         }
